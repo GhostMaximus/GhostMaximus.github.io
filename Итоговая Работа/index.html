@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Прогнозирование численности студентов вузов РФ | Расширенная аналитика</title>
+    <!-- Подключение внешних библиотек -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <!-- Подключаем отдельный CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="dashboard">
+    <div class="hero">
+        <h1>📊 Прогнозирование численности студентов высшего образования РФ</h1>
+        <p>Фактические данные 2010–2025 · Прогноз до 2030 · Интерактивный график с возможностью сравнения показателей</p>
+    </div>
+
+    <div class="kpi-grid" id="kpiGrid"></div>
+
+    <div class="control-panel">
+        <div class="select-group">
+            <label>📈 Основной показатель:</label>
+            <select id="mainMetric">
+                <option value="students">👩‍🎓 Студенты (тыс.)</option>
+                <option value="budget">🎯 Бюджетные места (тыс.)</option>
+                <option value="foreign">🌐 Иностранные студенты (тыс.)</option>
+                <option value="unemployment">⚠️ Безработица молодёжи (%)</option>
+                <option value="investments">💰 Инвестиции в образование (млрд руб.)</option>
+                <option value="incomes">💵 Реальные доходы населения (%)</option>
+            </select>
+        </div>
+        <div class="select-group">
+            <label>➕ Сравнить с (опционально):</label>
+            <select id="compareMetric">
+                <option value="none">— без сравнения —</option>
+                <option value="students">👩‍🎓 Студенты</option>
+                <option value="budget">🎯 Бюджетные места</option>
+                <option value="foreign">🌐 Иностранные студенты</option>
+                <option value="unemployment">⚠️ Безработица молодёжи</option>
+                <option value="investments">💰 Инвестиции в образование</option>
+                <option value="incomes">💵 Реальные доходы</option>
+            </select>
+        </div>
+        <button id="exportCSV">📎 Экспорт данных (CSV)</button>
+        <button id="resetCompare">✖️ Сбросить сравнение</button>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="mainChart" width="900" height="450"></canvas>
+    </div>
+
+    <div class="stats-panel" id="statsPanel"></div>
+
+    <div class="data-table-wrapper">
+        <table class="data-table" id="fullDataTable">
+            <thead>
+                <tr><th>Год</th><th>Студенты (тыс.)</th><th>Бюджетные места</th><th>Иностранные студенты</th><th>Безработица молодёжи (%)</th><th>Инвестиции в обр. (млрд)</th><th>Доходы (%)</th><th>Выпускники 11 кл.</th></tr>
+            </thead>
+            <tbody id="tableDynamicBody"></tbody>
+        </table>
+    </div>
+    <div class="footnote">📌 Прогноз 2026–2030 основан на данных листа "прогнозируемые значения". График поддерживает двойную ось (если единицы измерения разные). Наведите для деталей.</div>
+</div>
+
+<!-- Подключаем отдельный JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
